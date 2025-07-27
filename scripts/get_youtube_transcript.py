@@ -30,8 +30,8 @@ def get_transcript_youtube_api(video_id, lang='en'):
             "source": "youtube_transcript_api",
             "language": transcript.language_code,
             "is_generated": transcript.is_generated,
-            "transcript": entries,
             "text": " ".join([entry['text'] for entry in entries])
+            # Removed transcript field to reduce data size
         }
     except (TranscriptsDisabled, NoTranscriptFound):
         return None
@@ -65,8 +65,8 @@ def get_transcript_ytdlp(video_id, lang='en'):
                         "source": "yt-dlp",
                         "language": lang,
                         "is_generated": True,
-                        "transcript": events,
                         "text": " ".join(lines)
+                        # Removed transcript field to reduce data size
                     }
         except subprocess.CalledProcessError as e:
             print(f"yt-dlp error: {e}", file=sys.stderr)
@@ -94,8 +94,8 @@ def transcribe_whisper(video_id, lang='en'):
                 "source": "whisper",
                 "language": lang,
                 "is_generated": True,
-                "transcript": transcript,
                 "text": transcript["text"]
+                # Removed transcript field to reduce data size
             }
         except Exception as e:
             print(f"Whisper error: {e}", file=sys.stderr)

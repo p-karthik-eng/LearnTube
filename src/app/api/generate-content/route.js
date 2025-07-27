@@ -118,7 +118,8 @@ export async function POST(req) {
             hasError: !!parsed.error, 
             hasText: !!parsed.text, 
             source: parsed.source,
-            textLength: parsed.text?.length || 0
+            textLength: parsed.text?.length || 0,
+            dataSize: JSON.stringify(parsed).length + ' bytes'
           });
           
           // Check if it's an error response from Python
@@ -133,12 +134,13 @@ export async function POST(req) {
           }
           
           // Convert Python output format to match expected Node.js format
+          // Only store clean text and essential metadata, not raw timing data
           const transcriptData = {
             cleanText: parsed.text || '',
             source: parsed.source || 'python-fallback',
             language: parsed.language || language,
-            isGenerated: parsed.is_generated || false,
-            rawData: parsed.transcript || []
+            isGenerated: parsed.is_generated || false
+            // Removed rawData to reduce file size - only keeping clean text
           };
           
           // Create a record similar to the successful case
