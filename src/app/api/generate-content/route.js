@@ -1,7 +1,5 @@
 import dbConnect from '../../../lib/mongodb.js';
 import AdminData from '../../../models/AdminData.js';
-import { fetchTimedText } from '../../../utils/ytTimedText.js';
-import { ProxyTranscriptFetcher } from '../../../utils/proxy-transcript.js';
 import { validateGenerateBody, methodOnly } from '../../../utils/validation.js';
 import { normaliseYouTubeUrl } from '../../../utils/youtube.js';
 
@@ -23,63 +21,13 @@ export async function POST(req) {
 
     console.log(`🔄 Cache miss, fetching transcript for: ${videoId}`);
 
-    let transcript;
-    let extractionMethod = 'direct';
-
-    // Strategy 1: Direct YouTube API
+    // --- PYTHON WHISPER EXTRACTION (now main method) ---
     try {
-      transcript = await fetchTimedText(videoId, language);
-      extractionMethod = 'direct-api';
-    } catch (directError) {
-      console.log(`❌ Direct API failed: ${directError.message}`);
-      
-      // Strategy 2: Proxy-based fetch (for Indian IPs)
-      try {
-        console.log(`🌐 Attempting proxy-based extraction...`);
-        const proxyFetcher = new ProxyTranscriptFetcher();
-        transcript = await proxyFetcher.fetchWithProxy(videoId, language);
-        extractionMethod = 'proxy-api';
-      } catch (proxyError) {
-        console.log(`❌ Proxy fetch failed: ${proxyError.message}`);
-        
-        // Strategy 3: Return detailed error for user
-        throw new Error(`Transcript extraction failed: ${directError.message}. This video may not have accessible captions or may be region-restricted from India.`);
-      }
-    }
-
-    if (!transcript || !transcript.cleanText || transcript.cleanText.length < 10) {
-      throw new Error('Retrieved transcript is empty or too short');
-    }
-
-    console.log(`✅ Transcript extracted using ${extractionMethod}: ${transcript.cleanText.length} characters`);
-
-    const record = await AdminData.create({
-      videoId,
-      language,
-      url: normaliseYouTubeUrl(url),
-      transcript,
-      extractionMethod,
-      fetchedAt: new Date()
-    });
-
-    return Response.json({ 
-      success: true, 
-      cached: false, 
-      data: record,
-      meta: {
-        extractionMethod,
-        transcriptLength: transcript.cleanText.length,
-        processingTime: Date.now() - Date.now() // Placeholder
-      }
-    });
-
-  } catch (err) {
-    console.error(`❌ Error processing ${videoId}:`, err.message);
-    // --- PYTHON FALLBACK ---
-    try {
-      console.log(`🐍 Attempting Python fallback for: ${videoId}`);
+      console.log(`🐍 Using Python Whisper script for: ${videoId}`);
       const { spawn } = await import('child_process');
-      const py = spawn('C:\\Users\\karth\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', ['scripts/get_youtube_transcript.py', url]);
+      // Use USERPROFILE for portability
+      const pythonPath = `${process.env.USERPROFILE}\\AppData\\Local\\Programs\\Python\\Python311\\python.exe`;
+      const py = spawn(pythonPath, ['scripts/get_youtube_transcript.py', url]);
       let output = '';
       let error = '';
       for await (const data of py.stdout) {
@@ -144,21 +92,21 @@ export async function POST(req) {
           };
           
           // Create a record similar to the successful case
-          const record = {
+          const record = await AdminData.create({
             videoId,
             language,
             url: normaliseYouTubeUrl(url),
             transcript: transcriptData,
-            extractionMethod: 'python-fallback',
+            extractionMethod: 'python-whisper',
             fetchedAt: new Date()
-          };
+          });
           
           return Response.json({
             success: true,
             cached: false,
             data: record,
             meta: {
-              extractionMethod: 'python-fallback',
+              extractionMethod: 'python-whisper',
               transcriptLength: transcriptData.cleanText.length,
               source: parsed.source
             }
@@ -182,10 +130,18 @@ export async function POST(req) {
         success: false,
         error: pythonError.message,
         videoId,
-        suggestion: 'All transcript extraction methods failed. Try a different video.'
+        suggestion: 'Transcript extraction failed. Try a different video.'
       }, { status: 500 });
     }
-    // --- END PYTHON FALLBACK ---
+    // --- END PYTHON WHISPER EXTRACTION ---
+  } catch (err) {
+    console.error(`❌ Error processing ${videoId}:`, err.message);
+    return Response.json({
+      success: false,
+      error: err.message,
+      videoId,
+      suggestion: 'Transcript extraction failed. Try a different video.'
+    }, { status: 500 });
   }
 }
 
