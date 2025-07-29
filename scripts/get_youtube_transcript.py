@@ -5,6 +5,12 @@ import subprocess
 import tempfile
 import os
 
+# Requirements:
+# pip install youtube-transcript-api openai yt-dlp
+# Usage:
+#   python get_youtube_transcript.py <youtube_url>
+# Ensure 'yt-dlp' is installed and available in your PATH.
+
 def extract_video_id(url):
     patterns = [
         r'(?:v=|\/)([0-9A-Za-z_-]{11})',
@@ -42,7 +48,7 @@ def get_transcript_youtube_api(video_id, lang='en'):
 def get_transcript_ytdlp(video_id, lang='en'):
     with tempfile.TemporaryDirectory() as tmpdir:
         cmd = [
-            r"C:\\Users\\karth\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\yt-dlp.exe",
+            "yt-dlp",
             f"https://www.youtube.com/watch?v={video_id}",
             "--write-auto-subs",
             "--sub-lang", lang,
@@ -79,7 +85,7 @@ def transcribe_whisper(video_id, lang='en'):
     with tempfile.TemporaryDirectory() as tmpdir:
         audio_path = os.path.join(tmpdir, "audio.mp3")
         cmd = [
-            r"C:\\Users\\karth\\AppData\\Local\\Programs\\Python\\Python311\\Scripts\\yt-dlp.exe",
+            "yt-dlp",
             f"https://www.youtube.com/watch?v={video_id}",
             "-f", "bestaudio",
             "--extract-audio",
