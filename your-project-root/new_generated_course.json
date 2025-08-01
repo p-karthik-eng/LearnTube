@@ -1,0 +1,407 @@
+{
+  "courseInfo": {
+    "title": "Inheritance in Java",
+    "subtitle": "Comprehensive course on inheritance in java",
+    "duration": "1h 15min",
+    "totalLessons": 5
+  },
+  "videoSource": {
+    "url": "original_video_url"
+  },
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Inheritance in Java",
+      "subtitle": "Learn about inheritance in java",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:00:00",
+        "end": "00:15:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore inheritance in java and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Inheritance in Java",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Method Overriding",
+                "content": "Method Overriding"
+              },
+              {
+                "subtitle": "equals method and Comparable interface",
+                "content": "equals method and Comparable interface"
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Creating a Cat class that extends Dog",
+                "content": "Creating a Cat class that extends Dog"
+              },
+              {
+                "subtitle": "Overriding a method in the subclass",
+                "content": "Overriding a method in the subclass"
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about inheritance in java. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 11,
+          "question": "What keyword is used to inherit from a superclass in Java?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of inheritance in java."
+        },
+        {
+          "id": 12,
+          "question": "What is the purpose of method overriding?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of inheritance in java."
+        },
+        {
+          "id": 13,
+          "question": "How do you call a superclass constructor in a subclass?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of inheritance in java."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Method Overriding",
+      "subtitle": "Learn about method overriding",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:15:00",
+        "end": "00:30:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore method overriding and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Method Overriding",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Method Overriding",
+                "content": "Method Overriding"
+              },
+              {
+                "subtitle": "equals method and Comparable interface",
+                "content": "equals method and Comparable interface"
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Overriding a method in the subclass",
+                "content": "Overriding a method in the subclass"
+              },
+              {
+                "subtitle": "Overriding equals() for object comparison",
+                "content": "Overriding equals() for object comparison"
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about method overriding. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 21,
+          "question": "What is the purpose of method overriding?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of method overriding."
+        },
+        {
+          "id": 22,
+          "question": "Can static methods access instance variables directly?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of method overriding."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Constructors in Inheritance",
+      "subtitle": "Learn about constructors in inheritance",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:30:00",
+        "end": "00:45:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore constructors in inheritance and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Constructors in Inheritance",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Method Overriding",
+                "content": "Method Overriding"
+              },
+              {
+                "subtitle": "equals method and Comparable interface",
+                "content": "equals method and Comparable interface"
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Creating a Cat class that extends Dog",
+                "content": "Creating a Cat class that extends Dog"
+              },
+              {
+                "subtitle": "Overriding a method in the subclass",
+                "content": "Overriding a method in the subclass"
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about constructors in inheritance. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 31,
+          "question": "What keyword is used to inherit from a superclass in Java?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of constructors in inheritance."
+        },
+        {
+          "id": 32,
+          "question": "What is the purpose of method overriding?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of constructors in inheritance."
+        },
+        {
+          "id": 33,
+          "question": "How do you call a superclass constructor in a subclass?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of constructors in inheritance."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Static Variables and Methods",
+      "subtitle": "Learn about static variables and methods",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:45:00",
+        "end": "01:00:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore static variables and methods and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Static Variables and Methods",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Static Members",
+                "content": "Static Members"
+              },
+              {
+                "subtitle": "equals method and Comparable interface",
+                "content": "equals method and Comparable interface"
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Accessing static variables without instantiation",
+                "content": "Accessing static variables without instantiation"
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about static variables and methods. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 41,
+          "question": "Can static methods access instance variables directly?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of static variables and methods."
+        },
+        {
+          "id": 42,
+          "question": "What is the main concept of static variables and methods?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer based on lesson content",
+          "explanation": "This question evaluates your understanding of static variables and methods."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Object Comparison",
+      "subtitle": "Learn about object comparison",
+      "type": "video",
+      "videoMeta": {
+        "start": "01:00:00",
+        "end": "01:15:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore object comparison and its key concepts.",
+        "sections": [
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Overriding equals() for object comparison",
+                "content": "Overriding equals() for object comparison"
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about object comparison. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 51,
+          "question": "What are two ways to implement custom object comparison in Java?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of object comparison."
+        },
+        {
+          "id": 52,
+          "question": "What is the main concept of object comparison?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer based on lesson content",
+          "explanation": "This question evaluates your understanding of object comparison."
+        }
+      ]
+    }
+  ],
+  "finalExam": {
+    "enabled": true,
+    "prerequisiteCompletion": 100,
+    "timeLimit": "1h 30min",
+    "questionCount": 5,
+    "passingScore": 70,
+    "examType": "application_based"
+  }
+}

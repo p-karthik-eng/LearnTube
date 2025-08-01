@@ -4,13 +4,12 @@ import tiktoken
 from typing import Dict, List
 import asyncio
 import time
-import sys
 
 class TranscriptProcessor:
     def __init__(self, model_name="deepseek-chat", max_tokens=60000):
         self.encoding = tiktoken.get_encoding("cl100k_base")
         self.max_tokens = max_tokens
-        self.chunk_size = 4000  # Safe chunk size with buffer for prompts
+        self.chunk_size = 12000  # Increased chunk size to reduce number of requests
     
     def count_tokens(self, text: str) -> int:
         """Count tokens in text"""
@@ -75,4 +74,4 @@ class TranscriptProcessor:
         if len(transcript_json["content"].strip()) < 100:
             return False
         
-        return True 
+        return True

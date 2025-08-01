@@ -27,14 +27,46 @@ export default function LearningPage() {
   // Fetch course data from backend
   useEffect(() => {
     const fetchCourseData = async () => {
-      setLoading(true);
-      setTimeout(() => {
-        const data = getDummyCourseData();
-        setCourseData(data);
-        setSelectedLessonId(data.lessons.find(lesson => lesson.current)?.id || data.lessons[0]?.id);
+      if (!courseUrl) {
+        setError('No course URL provided');
         setLoading(false);
-      }, 500);
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch('/api/generate-learning-content', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ url: courseUrl }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to generate course content');
+        }
+
+        if (!result.success) {
+          throw new Error(result.error || 'Course generation failed');
+        }
+
+        // Transform the API response to match frontend expectations
+        const transformedData = transformCourseData(result.course_data, courseUrl);
+        setCourseData(transformedData);
+        setSelectedLessonId(transformedData.lessons[0]?.id);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching course data:', err);
+        setError(err.message);
+        setLoading(false);
+      }
     };
+
     fetchCourseData();
   }, [courseUrl]);
 
@@ -51,6 +83,64 @@ export default function LearningPage() {
   };
 
   const selectedLesson = courseData?.lessons?.find(lesson => lesson.id === selectedLessonId);
+
+  // Transform API response to frontend format
+  const transformCourseData = (apiData, originalUrl) => {
+    // Extract course info
+    const courseInfo = apiData.courseInfo || {};
+    const lessons = apiData.lessons || [];
+    
+    // Create course overview from available data
+    const courseOverview = {
+      title: courseInfo.title || "Generated Course",
+      duration: courseInfo.duration || "Unknown duration",
+      description: courseInfo.subtitle || "A comprehensive course generated from video content.",
+      learningObjectives: [
+        "Master the key concepts presented in the video",
+        "Apply the knowledge through interactive quizzes",
+        "Complete all lessons to gain comprehensive understanding"
+      ],
+      targetAudience: [
+        "Students interested in the topic",
+        "Learners seeking practical knowledge",
+        "Anyone wanting to understand the content"
+      ],
+      potentialCareers: [
+        { title: "Knowledge Professional", salary: "$50,000 - $100,000", avg: "$75,000" }
+      ]
+    };
+
+    // Transform lessons to match frontend expectations
+    const transformedLessons = lessons.map((lesson, index) => ({
+      ...lesson,
+      // Ensure all required fields are present
+      id: lesson.id || index + 1,
+      title: lesson.title || `Lesson ${index + 1}`,
+      subtitle: lesson.subtitle || `Lesson ${index + 1} description`,
+      type: lesson.type || "video",
+      videoMeta: lesson.videoMeta || {
+        start: `00:${String(index * 15).padStart(2, '0')}:00`,
+        end: `00:${String((index + 1) * 15).padStart(2, '0')}:00`
+      },
+      completed: lesson.completed || false,
+      current: lesson.current || (index === 0), // First lesson is current
+      content: {
+        introduction: lesson.content?.introduction || `Introduction to ${lesson.title}`,
+        sections: lesson.content?.sections || [],
+        conclusion: lesson.content?.conclusion || `Conclusion of ${lesson.title}`
+      },
+      quizzes: lesson.quizzes || []
+    }));
+
+    return {
+      courseInfo,
+      videoSource: {
+        url: originalUrl
+      },
+      courseOverview,
+      lessons: transformedLessons
+    };
+  };
 
   // --- DUMMY DATA (matches user JSON) ---
   const getDummyCourseData = () => ({

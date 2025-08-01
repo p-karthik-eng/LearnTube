@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { spawn } from 'child_process';
+import fetch from 'node-fetch';
 
 // Helper to run a Python script and return its output as JSON
 async function runPythonScript(scriptPath, args = [], input = null) {
@@ -36,60 +37,58 @@ async function runPythonScript(scriptPath, args = [], input = null) {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { url, prompt } = body;
+    const { url } = body;
     if (!url) {
       return NextResponse.json({ error: 'Missing YouTube URL' }, { status: 400 });
     }
 
-    console.log(`🎯 Processing learning content generation for: ${url}`);
+    // Extract videoId from URL
+    const videoId = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)?.[1];
+    if (!videoId) {
+      return NextResponse.json({ error: 'Invalid YouTube URL' }, { status: 400 });
+    }
 
     // 1. Extract transcript using the existing Python script
     let transcriptResult;
     try {
-      console.log(`📝 Extracting transcript...`);
       transcriptResult = await runPythonScript('scripts/get_youtube_transcript.py', [url]);
     } catch (err) {
-      console.error(`❌ Transcript extraction failed: ${err.message}`);
       return NextResponse.json({ error: 'Transcript extraction failed', details: err.message }, { status: 500 });
     }
 
     if (!transcriptResult || !transcriptResult.text) {
-      console.error(`❌ No transcript text found in result`);
       return NextResponse.json({ error: 'Transcript extraction returned no text', details: transcriptResult }, { status: 500 });
     }
 
-    console.log(`✅ Transcript extracted successfully (${transcriptResult.text.length} characters)`);
-
-    // Prepare transcript JSON for LLM script
-    const transcriptJson = JSON.stringify({ content: transcriptResult.text });
-
-    // 2. Generate learning content using the LLM Python entry script
-    let llmResult;
+    // 2. Send transcript to Python FastAPI server for course generation
+    let pythonApiResponse;
     try {
-      console.log(`🤖 Generating learning content...`);
-      const llmArgs = prompt ? ['--prompt', prompt] : [];
-      llmResult = await runPythonScript('scripts/generate_learning_content.py', llmArgs, transcriptJson);
+      const response = await fetch('http://localhost:8000/generate-course', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: transcriptResult.text })
+      });
+      pythonApiResponse = await response.json();
     } catch (err) {
-      console.error(`❌ Learning content generation failed: ${err.message}`);
-      return NextResponse.json({ error: 'Learning content generation failed', details: err.message }, { status: 500 });
+      return NextResponse.json({ error: 'Failed to contact Python FastAPI server', details: err.message }, { status: 500 });
     }
 
-    console.log(`✅ Learning content generated successfully`);
+    // 3. Validate and return the Python server's response
+    if (!pythonApiResponse.success) {
+      return NextResponse.json({ 
+        error: pythonApiResponse.error || 'Course generation failed' 
+      }, { status: 500 });
+    }
 
-    // 3. Return the final JSON response
+    // Return the successful response without database storage
     return NextResponse.json({
       success: true,
-      data: llmResult,
-      meta: {
-        transcriptSource: transcriptResult.source,
-        transcriptLanguage: transcriptResult.language,
-        isTranscriptGenerated: transcriptResult.is_generated,
-        transcriptLength: transcriptResult.text.length,
-        courseInfo: llmResult.courseInfo
-      }
+      course_data: pythonApiResponse.course_data,
+      processing_stats: pythonApiResponse.processing_stats,
+      video_id: videoId,
+      transcript_length: transcriptResult.text.length
     });
   } catch (err) {
-    console.error(`❌ Internal server error: ${err.message}`);
     return NextResponse.json({ error: 'Internal server error', details: err.message }, { status: 500 });
   }
 }
@@ -100,8 +99,7 @@ export async function GET() {
     usage: {
       method: 'POST',
       body: { 
-        url: 'https://youtube.com/watch?v=VIDEO_ID', 
-        prompt: 'Optional custom prompt for course generation' 
+        url: 'https://youtube.com/watch?v=VIDEO_ID'
       }
     }
   }, { status: 405 });

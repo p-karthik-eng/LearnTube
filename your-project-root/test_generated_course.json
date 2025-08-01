@@ -1,0 +1,463 @@
+{
+  "courseInfo": {
+    "title": "Inheritance in Java",
+    "subtitle": "Comprehensive course on inheritance in java",
+    "duration": "1h 15min",
+    "totalLessons": 5
+  },
+  "videoSource": {
+    "url": "original_video_url"
+  },
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Inheritance in Java",
+      "subtitle": "Learn about inheritance in java",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:00:00",
+        "end": "00:15:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore inheritance in java and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Inheritance in Java",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Inheritance allows classes to inherit attributes a...",
+                "content": "Inheritance allows classes to inherit attributes and methods from a parent class (superclass)."
+              },
+              {
+                "subtitle": "Method overriding enables subclasses to provide sp...",
+                "content": "Method overriding enables subclasses to provide specific implementations for methods defined in the superclass."
+              },
+              {
+                "subtitle": "Using 'super' keyword to call the superclass const...",
+                "content": "Using 'super' keyword to call the superclass constructor."
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Creating a Cat class that inherits from Dog and ov...",
+                "content": "Creating a Cat class that inherits from Dog and overrides the 'speak' method."
+              },
+              {
+                "subtitle": "Using 'super' in the Cat constructor to initialize...",
+                "content": "Using 'super' in the Cat constructor to initialize inherited attributes."
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about inheritance in java. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 11,
+          "question": "What keyword is used to inherit from a superclass in Java?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of inheritance in java."
+        },
+        {
+          "id": 12,
+          "question": "What is the difference between static and instance variables?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of inheritance in java."
+        },
+        {
+          "id": 13,
+          "question": "Why would you override the 'equals' method in a class?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of inheritance in java."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Method overriding",
+      "subtitle": "Learn about method overriding",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:15:00",
+        "end": "00:30:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore method overriding and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Method overriding",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Inheritance allows classes to inherit attributes a...",
+                "content": "Inheritance allows classes to inherit attributes and methods from a parent class (superclass)."
+              },
+              {
+                "subtitle": "Method overriding enables subclasses to provide sp...",
+                "content": "Method overriding enables subclasses to provide specific implementations for methods defined in the superclass."
+              },
+              {
+                "subtitle": "Static variables and methods belong to the class r...",
+                "content": "Static variables and methods belong to the class rather than instances."
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Creating a Cat class that inherits from Dog and ov...",
+                "content": "Creating a Cat class that inherits from Dog and overrides the 'speak' method."
+              },
+              {
+                "subtitle": "Implementing 'equals' and 'compareTo' methods in a...",
+                "content": "Implementing 'equals' and 'compareTo' methods in a Student class for object comparison."
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about method overriding. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 21,
+          "question": "Why would you override the 'equals' method in a class?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of method overriding."
+        },
+        {
+          "id": 22,
+          "question": "What is the purpose of the 'toString' method?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of method overriding."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Constructors in inheritance",
+      "subtitle": "Learn about constructors in inheritance",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:30:00",
+        "end": "00:45:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore constructors in inheritance and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Constructors in inheritance",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Inheritance allows classes to inherit attributes a...",
+                "content": "Inheritance allows classes to inherit attributes and methods from a parent class (superclass)."
+              },
+              {
+                "subtitle": "Method overriding enables subclasses to provide sp...",
+                "content": "Method overriding enables subclasses to provide specific implementations for methods defined in the superclass."
+              },
+              {
+                "subtitle": "Using 'super' keyword to call the superclass const...",
+                "content": "Using 'super' keyword to call the superclass constructor."
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Creating a Cat class that inherits from Dog and ov...",
+                "content": "Creating a Cat class that inherits from Dog and overrides the 'speak' method."
+              },
+              {
+                "subtitle": "Using 'super' in the Cat constructor to initialize...",
+                "content": "Using 'super' in the Cat constructor to initialize inherited attributes."
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about constructors in inheritance. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 31,
+          "question": "What keyword is used to inherit from a superclass in Java?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of constructors in inheritance."
+        },
+        {
+          "id": 32,
+          "question": "What is the difference between static and instance variables?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of constructors in inheritance."
+        },
+        {
+          "id": 33,
+          "question": "Why would you override the 'equals' method in a class?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of constructors in inheritance."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Class variables (static variables)",
+      "subtitle": "Learn about class variables (static variables)",
+      "type": "video",
+      "videoMeta": {
+        "start": "00:45:00",
+        "end": "01:00:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore class variables (static variables) and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Class variables (static variables)",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Inheritance allows classes to inherit attributes a...",
+                "content": "Inheritance allows classes to inherit attributes and methods from a parent class (superclass)."
+              },
+              {
+                "subtitle": "Method overriding enables subclasses to provide sp...",
+                "content": "Method overriding enables subclasses to provide specific implementations for methods defined in the superclass."
+              },
+              {
+                "subtitle": "Using 'super' keyword to call the superclass const...",
+                "content": "Using 'super' keyword to call the superclass constructor."
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Creating a Cat class that inherits from Dog and ov...",
+                "content": "Creating a Cat class that inherits from Dog and overrides the 'speak' method."
+              },
+              {
+                "subtitle": "Adding a 'food' attribute to the Cat class as an e...",
+                "content": "Adding a 'food' attribute to the Cat class as an example of extending a subclass."
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about class variables (static variables). Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 41,
+          "question": "What keyword is used to inherit from a superclass in Java?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of class variables (static variables)."
+        },
+        {
+          "id": 42,
+          "question": "How do you call a superclass constructor from a subclass?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of class variables (static variables)."
+        },
+        {
+          "id": 43,
+          "question": "What is the difference between static and instance variables?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of class variables (static variables)."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Static methods",
+      "subtitle": "Learn about static methods",
+      "type": "video",
+      "videoMeta": {
+        "start": "01:00:00",
+        "end": "01:15:00"
+      },
+      "completed": false,
+      "current": false,
+      "content": {
+        "introduction": "In this lesson, we'll explore static methods and its key concepts.",
+        "sections": [
+          {
+            "title": "Understanding Static methods",
+            "type": "concept",
+            "points": [
+              {
+                "subtitle": "Inheritance allows classes to inherit attributes a...",
+                "content": "Inheritance allows classes to inherit attributes and methods from a parent class (superclass)."
+              },
+              {
+                "subtitle": "Method overriding enables subclasses to provide sp...",
+                "content": "Method overriding enables subclasses to provide specific implementations for methods defined in the superclass."
+              },
+              {
+                "subtitle": "Static variables and methods belong to the class r...",
+                "content": "Static variables and methods belong to the class rather than instances."
+              }
+            ]
+          },
+          {
+            "title": "Examples and Demonstrations",
+            "type": "example",
+            "points": [
+              {
+                "subtitle": "Demonstrating static variables with a 'count' in D...",
+                "content": "Demonstrating static variables with a 'count' in Dog class to track instances."
+              },
+              {
+                "subtitle": "Implementing 'equals' and 'compareTo' methods in a...",
+                "content": "Implementing 'equals' and 'compareTo' methods in a Student class for object comparison."
+              }
+            ]
+          }
+        ],
+        "conclusion": "You've now learned about static methods. Practice these concepts to reinforce your understanding."
+      },
+      "quizzes": [
+        {
+          "id": 51,
+          "question": "What is the difference between static and instance variables?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer will be determined based on content",
+          "explanation": "This question tests your understanding of static methods."
+        },
+        {
+          "id": 52,
+          "question": "What is the main concept of static methods?",
+          "type": "multiple_choice",
+          "options": [
+            "Option A",
+            "Option B",
+            "Option C",
+            "Option D"
+          ],
+          "correctAnswer": 0,
+          "answer": "Correct answer based on lesson content",
+          "explanation": "This question evaluates your understanding of static methods."
+        }
+      ]
+    }
+  ],
+  "finalExam": {
+    "enabled": true,
+    "prerequisiteCompletion": 100,
+    "timeLimit": "1h 30min",
+    "questionCount": 5,
+    "passingScore": 70,
+    "examType": "application_based"
+  }
+}

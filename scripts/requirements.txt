@@ -1,5 +1,0 @@
-youtube-transcript-api
-openai
-yt-dlp
-tiktoken
-aiohttp 
