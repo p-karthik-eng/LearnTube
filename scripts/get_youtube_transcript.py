@@ -5,12 +5,6 @@ import subprocess
 import tempfile
 import os
 
-# Requirements:
-# pip install youtube-transcript-api openai yt-dlp
-# Usage:
-#   python get_youtube_transcript.py <youtube_url>
-# Ensure 'yt-dlp' is installed and available in your PATH.
-
 def extract_video_id(url):
     patterns = [
         r'(?:v=|\/)([0-9A-Za-z_-]{11})',
@@ -26,7 +20,6 @@ def get_transcript_youtube_api(video_id, lang='en'):
     try:
         from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
         transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-        # Try to fetch the English transcript (official or auto-generated)
         try:
             transcript = transcript_list.find_transcript([lang])
         except NoTranscriptFound:
@@ -36,13 +29,11 @@ def get_transcript_youtube_api(video_id, lang='en'):
             "source": "youtube_transcript_api",
             "language": transcript.language_code,
             "is_generated": transcript.is_generated,
-            "text": " ".join([entry['text'] for entry in entries])
-            # Removed transcript field to reduce data size
+            "text": " ".join([entry['text'] for entry in entries if entry.get("text")])
         }
     except (TranscriptsDisabled, NoTranscriptFound):
         return None
-    except Exception as e:
-        print(f"youtube_transcript_api error: {e}", file=sys.stderr)
+    except Exception:
         return None
 
 def get_transcript_ytdlp(video_id, lang='en'):
@@ -57,7 +48,7 @@ def get_transcript_ytdlp(video_id, lang='en'):
             "-o", os.path.join(tmpdir, "%(id)s.%(ext)s"),
         ]
         try:
-            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             for fname in os.listdir(tmpdir):
                 if fname.endswith(".json3"):
                     with open(os.path.join(tmpdir, fname), encoding="utf-8") as f:
@@ -72,10 +63,8 @@ def get_transcript_ytdlp(video_id, lang='en'):
                         "language": lang,
                         "is_generated": True,
                         "text": " ".join(lines)
-                        # Removed transcript field to reduce data size
                     }
-        except subprocess.CalledProcessError as e:
-            print(f"yt-dlp error: {e}", file=sys.stderr)
+        except subprocess.CalledProcessError:
             return None
     return None
 
@@ -93,48 +82,53 @@ def transcribe_whisper(video_id, lang='en'):
             "-o", audio_path
         ]
         try:
-            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+            subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             with open(audio_path, "rb") as audio_file:
                 transcript = openai.Audio.transcribe("whisper-1", audio_file)
             return {
                 "source": "whisper",
                 "language": lang,
                 "is_generated": True,
-                "text": transcript["text"]
-                # Removed transcript field to reduce data size
+                "text": transcript.get("text", "")
             }
-        except Exception as e:
-            print(f"Whisper error: {e}", file=sys.stderr)
+        except Exception:
             return None
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python get_youtube_transcript.py <youtube_url>")
+        print(json.dumps({"error": "Usage: python get_youtube_transcript.py <youtube_url>", "text": ""}))
         sys.exit(1)
-    url = sys.argv[1]
-    video_id = extract_video_id(url)
 
-    # 1. Try youtube_transcript_api (official and auto-generated)
+    url = sys.argv[1]
+    try:
+        video_id = extract_video_id(url)
+    except Exception as e:
+        print(json.dumps({"error": str(e), "text": ""}))
+        sys.exit(1)
+
+    # Try youtube_transcript_api
     result = get_transcript_youtube_api(video_id)
     if result and result.get("text"):
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        print(json.dumps(result, ensure_ascii=False))
         return
 
-    # 2. Fallback: yt-dlp auto-generated captions
+    # Fallback: yt-dlp
     result = get_transcript_ytdlp(video_id)
     if result and result.get("text"):
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        print(json.dumps(result, ensure_ascii=False))
         return
 
-    # 3. Fallback: Whisper transcription
+    # Fallback: Whisper
     result = transcribe_whisper(video_id)
     if result and result.get("text"):
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        print(json.dumps(result, ensure_ascii=False))
         return
 
+    # If all methods fail
     print(json.dumps({
-        "error": "No captions accessible for this video (official, auto-generated, or Whisper)."
+        "error": "No captions accessible for this video (official, auto-generated, or Whisper).",
+        "text": ""
     }))
 
 if __name__ == "__main__":
-    main() 
+    main()
